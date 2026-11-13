@@ -1,0 +1,61 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "servico_clientes (porta 5001)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/servico_clientes/app.py",
+      "cwd": "${workspaceFolder}/servico_clientes",
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONUNBUFFERED": "1"
+      }
+    },
+    {
+      "name": "servico_cardapio (porta 5002)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/servico_cardapio/app.py",
+      "cwd": "${workspaceFolder}/servico_cardapio",
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONUNBUFFERED": "1"
+      }
+    },
+    {
+      "name": "servico_entregadores (porta 5003)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/servico_entregadores/app.py",
+      "cwd": "${workspaceFolder}/servico_entregadores",
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONUNBUFFERED": "1"
+      }
+    },
+    {
+      "name": "servico_pedidos (porta 5004)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/servico_pedidos/app.py",
+      "cwd": "${workspaceFolder}/servico_pedidos",
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONUNBUFFERED": "1"
+      }
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Iniciar os 4 serviços",
+      "configurations": [
+        "servico_clientes (porta 5001)",
+        "servico_cardapio (porta 5002)",
+        "servico_entregadores (porta 5003)",
+        "servico_pedidos (porta 5004)"
+      ],
+      "stopAll": true
+    }
+  ]
+}
