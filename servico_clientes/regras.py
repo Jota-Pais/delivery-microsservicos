@@ -1,65 +1,69 @@
 """Regras de negócio. Aqui ficam as decisões do serviço (sem Flask, sem rotas)."""
 from erros import RegraDeNegocioError
-from models import Registro, db
+from models import Cliente, db
+
+CAMPOS_OBRIGATORIOS = ("nome", "telefone", "endereco")
+
+
+def _validar(dados):
+    """Confere os campos obrigatórios e devolve os valores já sem espaços."""
+    valores = {}
+    for campo in CAMPOS_OBRIGATORIOS:
+        valor = str(dados.get(campo) or "").strip()
+        if not valor:
+            raise RegraDeNegocioError(f"O campo '{campo}' é obrigatório.")
+        valores[campo] = valor
+    return valores
 
 
 def criar(dados):
-    nome = (dados.get("nome") or "").strip()
-    if not nome:
-        raise RegraDeNegocioError("O campo 'nome' é obrigatório.")
-    registro = Registro(nome=nome)
-    db.session.add(registro)
+    cliente = Cliente(**_validar(dados))
+    db.session.add(cliente)
     db.session.commit()
-    return registro
+    return cliente
 
 
 def dados_iniciais():
-    """Cria um registro de exemplo se o banco estiver vazio.
+    """Cria os clientes de exemplo se o banco estiver vazio.
 
     No Render gratuito o arquivo .db é apagado quando o serviço reinicia ou hiberna;
     por isso o serviço recria os dados de exemplo sempre que acorda.
-    TROQUE pelos dados de exemplo do seu domínio.
+    O cliente 1 fica ativo e o cliente 2 já nasce inativo, para testar o pedidos.
     """
-    if Registro.query.count() == 0:
-        db.session.add(Registro(nome="Exemplo inicial"))
+    if Cliente.query.count() == 0:
+        db.session.add(Cliente(nome="Ana Souza", telefone="(11) 98888-1111",
+                               endereco="Rua das Flores, 100"))
+        db.session.add(Cliente(nome="Bruno Lima", telefone="(11) 97777-2222",
+                               endereco="Av. Brasil, 2000", ativo=False))
         db.session.commit()
 
 
 def listar():
-    return Registro.query.order_by(Registro.id).all()
+    return Cliente.query.order_by(Cliente.id).all()
 
 
-def buscar(registro_id):
-    return db.session.get(Registro, registro_id)
+def buscar(cliente_id):
+    return db.session.get(Cliente, cliente_id)
 
 
-def atualizar(registro_id, dados):
-    registro = buscar(registro_id)
-    if registro is None:
+def atualizar(cliente_id, dados):
+    cliente = buscar(cliente_id)
+    if cliente is None:
         return None
-    nome = (dados.get("nome") or "").strip()
-    if not nome:
-        raise RegraDeNegocioError("O campo 'nome' é obrigatório.")
-    registro.nome = nome
+    valores = _validar(dados)
+    cliente.nome = valores["nome"]
+    cliente.telefone = valores["telefone"]
+    cliente.endereco = valores["endereco"]
     db.session.commit()
-    return registro
+    return cliente
 
 
-def inativar(registro_id):
-    registro = buscar(registro_id)
-    if registro is None:
+def inativar(cliente_id):
+    cliente = buscar(cliente_id)
+    if cliente is None:
         return None
-    if not registro.ativo:
-        raise RegraDeNegocioError("O registro já está inativo.")
-    registro.ativo = False
+    if not cliente.ativo:
+        raise RegraDeNegocioError("O cliente já está inativo.")
+    cliente.ativo = False
     db.session.commit()
-    return registro
-
-
-# TODO (integração): quando uma regra precisar de dados de outro serviço,
-# importe o módulo integracao e use a função chamar(). Exemplo comentado:
-#
-# import integracao
-# resposta = integracao.chamar("CARDAPIO", "GET", "/api/registros/1/ativo")
-# if not resposta.json()["ativo"]:
-#     raise RegraDeNegocioError("O registro do outro serviço está inativo.")
+    return cliente

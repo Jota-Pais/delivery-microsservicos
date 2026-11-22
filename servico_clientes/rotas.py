@@ -2,46 +2,47 @@ from flask import Blueprint, jsonify, request
 
 import regras
 
-rotas = Blueprint("registros", __name__, url_prefix="/api")
+rotas = Blueprint("clientes", __name__, url_prefix="/api")
 
 
 def _nao_encontrado():
-    return jsonify(erro="Registro não encontrado."), 404
+    return jsonify(erro="Cliente não encontrado."), 404
 
 
-@rotas.post("/registros")
+@rotas.post("/clientes")
 def criar():
-    registro = regras.criar(request.get_json(silent=True) or {})
-    return jsonify(registro.para_dict()), 201
+    cliente = regras.criar(request.get_json(silent=True) or {})
+    return jsonify(cliente.para_dict()), 201
 
 
-@rotas.get("/registros")
+@rotas.get("/clientes")
 def listar():
-    return jsonify([r.para_dict() for r in regras.listar()])
+    return jsonify([c.para_dict() for c in regras.listar()])
 
 
-@rotas.get("/registros/<int:registro_id>")
-def buscar(registro_id):
-    registro = regras.buscar(registro_id)
-    return jsonify(registro.para_dict()) if registro else _nao_encontrado()
+@rotas.get("/clientes/<int:cliente_id>")
+def buscar(cliente_id):
+    cliente = regras.buscar(cliente_id)
+    return jsonify(cliente.para_dict()) if cliente else _nao_encontrado()
 
 
-@rotas.put("/registros/<int:registro_id>")
-def atualizar(registro_id):
-    registro = regras.atualizar(registro_id, request.get_json(silent=True) or {})
-    return jsonify(registro.para_dict()) if registro else _nao_encontrado()
+@rotas.put("/clientes/<int:cliente_id>")
+def atualizar(cliente_id):
+    cliente = regras.atualizar(cliente_id, request.get_json(silent=True) or {})
+    return jsonify(cliente.para_dict()) if cliente else _nao_encontrado()
 
 
-@rotas.patch("/registros/<int:registro_id>/inativar")
-def inativar(registro_id):
-    registro = regras.inativar(registro_id)
-    return jsonify(registro.para_dict()) if registro else _nao_encontrado()
+@rotas.patch("/clientes/<int:cliente_id>/inativar")
+def inativar(cliente_id):
+    cliente = regras.inativar(cliente_id)
+    return jsonify(cliente.para_dict()) if cliente else _nao_encontrado()
 
 
-# Rota pensada para OUTROS serviços perguntarem "está ativo?" (uma busca simples).
-@rotas.get("/registros/<int:registro_id>/ativo")
-def esta_ativo(registro_id):
-    registro = regras.buscar(registro_id)
-    if registro is None:
+# Rota para o serviço de PEDIDOS perguntar "este cliente está ativo?" antes de
+# aceitar um pedido. Não aparece no uso normal pelo Thunder, mas a integração depende dela.
+@rotas.get("/clientes/<int:cliente_id>/ativo")
+def esta_ativo(cliente_id):
+    cliente = regras.buscar(cliente_id)
+    if cliente is None:
         return _nao_encontrado()
-    return jsonify(id=registro.id, ativo=registro.ativo)
+    return jsonify(id=cliente.id, ativo=cliente.ativo)
