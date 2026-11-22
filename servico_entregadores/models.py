@@ -5,25 +5,25 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 
-class Registro(db.Model):
-    """TROQUE o nome e os campos pelo assunto do seu serviço.
+class Entregador(db.Model):
+    """Entregador do delivery.
 
-    Exemplo: no serviço de residências, a classe vira Residencia
-    e os campos viram numero, rua, ativa...
+    ativo: o entregador trabalha aqui (cadastro válido).
+    disponivel: está livre agora, sem nenhuma entrega em andamento.
     """
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100), nullable=False)
+    veiculo = db.Column(db.String(50), nullable=False)
+    disponivel = db.Column(db.Boolean, nullable=False, default=True)
     ativo = db.Column(db.Boolean, nullable=False, default=True)
     criado_em = db.Column(db.DateTime, nullable=False, default=datetime.now)
-
-    # Para guardar a referência a algo de OUTRO serviço, use só um número
-    # (sem ForeignKey), por exemplo:
-    # morador_id = db.Column(db.Integer, nullable=True)
 
     def para_dict(self):
         return {
             "id": self.id,
             "nome": self.nome,
+            "veiculo": self.veiculo,
+            "disponivel": self.disponivel,
             "ativo": self.ativo,
             "criado_em": self.criado_em.isoformat(timespec="seconds"),
         }
