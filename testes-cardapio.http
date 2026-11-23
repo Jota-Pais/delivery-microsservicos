@@ -1,0 +1,90 @@
+### TESTES DO SERVICO DE CARDAPIO (porta 5002)
+### Como usar: deixe o servico rodando (py app.py dentro de servico_cardapio)
+### e clique em "Send Request" acima de cada bloco.
+
+@url = http://127.0.0.1:5002
+
+### 1. Health - deve dar 200 {"status": "no ar"}
+GET {{url}}/api/health
+
+### 2. Listar pratos - deve dar 200 com 2 pratos
+GET {{url}}/api/pratos
+
+### 3. Buscar prato 1 - deve dar 200 com preco e ativo
+GET {{url}}/api/pratos/1
+
+### 4. Buscar prato 2 - deve dar 200 com "ativo": false
+GET {{url}}/api/pratos/2
+
+### 5. Buscar prato que nao existe - deve dar 404
+GET {{url}}/api/pratos/9999
+
+### 6. Criar prato valido - deve dar 201
+POST {{url}}/api/pratos
+Content-Type: application/json
+
+{
+  "nome": "Suco de laranja",
+  "preco": 8.5
+}
+
+### 7. Criar sem nome - deve dar 400
+POST {{url}}/api/pratos
+Content-Type: application/json
+
+{
+  "preco": 10
+}
+
+### 8. Criar com preco 0 - deve dar 400
+POST {{url}}/api/pratos
+Content-Type: application/json
+
+{
+  "nome": "Prato gratis",
+  "preco": 0
+}
+
+### 9. Criar sem preco - deve dar 400
+POST {{url}}/api/pratos
+Content-Type: application/json
+
+{
+  "nome": "Sem preco"
+}
+
+### 10. Atualizar prato 1 - deve dar 200
+PUT {{url}}/api/pratos/1
+Content-Type: application/json
+
+{
+  "nome": "X-Bacon",
+  "preco": 29.0
+}
+
+### 11. Atualizar com preco negativo - deve dar 400
+PUT {{url}}/api/pratos/1
+Content-Type: application/json
+
+{
+  "nome": "X-Bacon",
+  "preco": -5
+}
+
+### 12. Atualizar prato que nao existe - deve dar 404
+PUT {{url}}/api/pratos/9999
+Content-Type: application/json
+
+{
+  "nome": "Fantasma",
+  "preco": 10
+}
+
+### 13. Inativar prato 1 - 1a vez deve dar 200, 2a vez deve dar 400 (ja inativo)
+PATCH {{url}}/api/pratos/1/inativar
+
+### 14. Inativar prato 2 - deve dar 400 (ja nasce inativo)
+PATCH {{url}}/api/pratos/2/inativar
+
+### 15. Inativar prato que nao existe - deve dar 404
+PATCH {{url}}/api/pratos/9999/inativar

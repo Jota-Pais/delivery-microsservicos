@@ -1,65 +1,66 @@
 """Regras de negócio. Aqui ficam as decisões do serviço (sem Flask, sem rotas)."""
 from erros import RegraDeNegocioError
-from models import Registro, db
+from models import Prato, db
 
 
-def criar(dados):
+def _validar(dados):
     nome = (dados.get("nome") or "").strip()
     if not nome:
         raise RegraDeNegocioError("O campo 'nome' é obrigatório.")
-    registro = Registro(nome=nome)
-    db.session.add(registro)
+    try:
+        preco = float(dados.get("preco"))
+    except (TypeError, ValueError):
+        raise RegraDeNegocioError("O campo 'preco' é obrigatório e deve ser um número.")
+    if preco <= 0:
+        raise RegraDeNegocioError("O 'preco' deve ser maior que zero.")
+    return nome, preco
+
+
+def criar(dados):
+    nome, preco = _validar(dados)
+    prato = Prato(nome=nome, preco=preco)
+    db.session.add(prato)
     db.session.commit()
-    return registro
+    return prato
 
 
 def dados_iniciais():
-    """Cria um registro de exemplo se o banco estiver vazio.
+    """Cria pratos de exemplo se o banco estiver vazio.
 
     No Render gratuito o arquivo .db é apagado quando o serviço reinicia ou hiberna;
     por isso o serviço recria os dados de exemplo sempre que acorda.
-    TROQUE pelos dados de exemplo do seu domínio.
     """
-    if Registro.query.count() == 0:
-        db.session.add(Registro(nome="Exemplo inicial"))
+    if Prato.query.count() == 0:
+        db.session.add(Prato(nome="X-Burger", preco=25.90, ativo=True))
+        db.session.add(Prato(nome="Pizza Calabresa", preco=39.90, ativo=False))
         db.session.commit()
 
 
 def listar():
-    return Registro.query.order_by(Registro.id).all()
+    return Prato.query.order_by(Prato.id).all()
 
 
-def buscar(registro_id):
-    return db.session.get(Registro, registro_id)
+def buscar(prato_id):
+    return db.session.get(Prato, prato_id)
 
 
-def atualizar(registro_id, dados):
-    registro = buscar(registro_id)
-    if registro is None:
+def atualizar(prato_id, dados):
+    prato = buscar(prato_id)
+    if prato is None:
         return None
-    nome = (dados.get("nome") or "").strip()
-    if not nome:
-        raise RegraDeNegocioError("O campo 'nome' é obrigatório.")
-    registro.nome = nome
+    nome, preco = _validar(dados)
+    prato.nome = nome
+    prato.preco = preco
     db.session.commit()
-    return registro
+    return prato
 
 
-def inativar(registro_id):
-    registro = buscar(registro_id)
-    if registro is None:
+def inativar(prato_id):
+    prato = buscar(prato_id)
+    if prato is None:
         return None
-    if not registro.ativo:
-        raise RegraDeNegocioError("O registro já está inativo.")
-    registro.ativo = False
+    if not prato.ativo:
+        raise RegraDeNegocioError("O prato já está inativo.")
+    prato.ativo = False
     db.session.commit()
-    return registro
-
-
-# TODO (integração): quando uma regra precisar de dados de outro serviço,
-# importe o módulo integracao e use a função chamar(). Exemplo comentado:
-#
-# import integracao
-# resposta = integracao.chamar("CARDAPIO", "GET", "/api/registros/1/ativo")
-# if not resposta.json()["ativo"]:
-#     raise RegraDeNegocioError("O registro do outro serviço está inativo.")
+    return prato

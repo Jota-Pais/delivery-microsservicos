@@ -2,7 +2,7 @@
 
 Uso (dentro de regras.py):
     import integracao
-    resposta = integracao.chamar("CARDAPIO", "GET", "/api/registros/1/ativo")
+    resposta = integracao.chamar("CLIENTES", "GET", "/api/clientes/1/ativo")
 
 Os endereços podem ser trocados por variáveis de ambiente (útil no Render):
     CARDAPIO_URL=https://meu-servico2.onrender.com

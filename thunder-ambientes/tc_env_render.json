@@ -1,0 +1,27 @@
+{
+  "client": "Thunder Client",
+  "environmentName": "Render",
+  "environmentId": "2fea1603-58c1-4ba4-a856-cc97ff4a6a88",
+  "dateExported": "2026-11-23T12:00:00.000Z",
+  "version": "1.2",
+  "default": false,
+  "global": false,
+  "variables": [
+    {
+      "name": "CLIENTES_URL",
+      "value": "https://COLE-O-LINK-DO-RENDER.onrender.com"
+    },
+    {
+      "name": "CARDAPIO_URL",
+      "value": "https://COLE-O-LINK-DO-RENDER.onrender.com"
+    },
+    {
+      "name": "ENTREGADORES_URL",
+      "value": "https://COLE-O-LINK-DO-RENDER.onrender.com"
+    },
+    {
+      "name": "PEDIDOS_URL",
+      "value": "https://COLE-O-LINK-DO-RENDER.onrender.com"
+    }
+  ]
+}

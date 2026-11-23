@@ -1,0 +1,27 @@
+{
+  "client": "Thunder Client",
+  "environmentName": "Local",
+  "environmentId": "60acbd6f-7bb8-4991-a322-da8563c0eaf9",
+  "dateExported": "2026-11-23T12:00:00.000Z",
+  "version": "1.2",
+  "default": true,
+  "global": false,
+  "variables": [
+    {
+      "name": "CLIENTES_URL",
+      "value": "http://127.0.0.1:5001"
+    },
+    {
+      "name": "CARDAPIO_URL",
+      "value": "http://127.0.0.1:5002"
+    },
+    {
+      "name": "ENTREGADORES_URL",
+      "value": "http://127.0.0.1:5003"
+    },
+    {
+      "name": "PEDIDOS_URL",
+      "value": "http://127.0.0.1:5004"
+    }
+  ]
+}

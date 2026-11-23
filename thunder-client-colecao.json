@@ -1,71 +1,78 @@
 {
   "client": "Thunder Client",
-  "collectionName": "Projeto - Microsserviços (modelo)",
+  "collectionName": "Delivery - Microsserviços",
   "collectionId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
-  "dateExported": "2026-11-06T20:00:00.000Z",
+  "dateExported": "2026-11-23T12:00:00.000Z",
   "version": "1.2",
   "folders": [
     {
-      "_id": "0883ab58-4f00-4cd7-b9b8-7912b830e9c9",
+      "_id": "98340015-6e3c-4e83-a280-a306263a29fb",
       "name": "servico_clientes (porta 5001)",
       "containerId": "",
-      "created": "2026-11-06T20:00:00.000Z",
+      "created": "2026-11-23T12:00:00.000Z",
       "sortNum": 10000
     },
     {
-      "_id": "385fafff-3d78-42ad-986e-3190440a6734",
+      "_id": "9f8257f2-7bcb-4b79-9978-5bcf3c4d21e3",
       "name": "servico_cardapio (porta 5002)",
       "containerId": "",
-      "created": "2026-11-06T20:00:00.000Z",
+      "created": "2026-11-23T12:00:00.000Z",
       "sortNum": 20000
     },
     {
-      "_id": "b70b23fb-ebf9-40ae-a151-5146d1aeb16d",
+      "_id": "b4bd9c71-767c-45ae-8ced-74168f4eaf15",
       "name": "servico_entregadores (porta 5003)",
       "containerId": "",
-      "created": "2026-11-06T20:00:00.000Z",
+      "created": "2026-11-23T12:00:00.000Z",
       "sortNum": 30000
     },
     {
-      "_id": "ff5a760b-78e5-4f71-945f-af91a1fe110c",
+      "_id": "ab54800b-371b-4575-a829-8dcca76cad2c",
       "name": "servico_pedidos (porta 5004)",
       "containerId": "",
-      "created": "2026-11-06T20:00:00.000Z",
+      "created": "2026-11-23T12:00:00.000Z",
       "sortNum": 40000
     },
     {
-      "_id": "98dacf83-4a8d-4485-9c02-999528d9723d",
-      "name": "Integrações (monte aqui os seus testes)",
+      "_id": "4b6d6ae0-b13a-4899-be82-57f8e7bc6139",
+      "name": "Integrações",
       "containerId": "",
-      "created": "2026-11-06T20:00:00.000Z",
+      "created": "2026-11-23T12:00:00.000Z",
       "sortNum": 50000
     }
   ],
   "requests": [
     {
-      "_id": "637a69ef-2dc8-4fce-8a20-860d311c402b",
+      "_id": "05583bdd-a553-4d13-8530-c2fbf600139c",
       "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
-      "containerId": "0883ab58-4f00-4cd7-b9b8-7912b830e9c9",
+      "containerId": "98340015-6e3c-4e83-a280-a306263a29fb",
       "name": "Health",
-      "url": "http://127.0.0.1:5001/api/health",
+      "url": "{{CLIENTES_URL}}/api/health",
       "method": "GET",
       "sortNum": 10000,
-      "created": "2026-11-06T20:00:00.000Z",
-      "modified": "2026-11-06T20:00:00.000Z",
+      "created": "2026-11-23T12:00:00.000Z",
+      "modified": "2026-11-23T12:00:00.000Z",
       "headers": [],
       "params": [],
-      "tests": []
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
     },
     {
-      "_id": "1e085012-079e-495b-9ef2-3320f6584272",
+      "_id": "c676120b-1d29-4958-a821-e0df0e4b9516",
       "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
-      "containerId": "0883ab58-4f00-4cd7-b9b8-7912b830e9c9",
+      "containerId": "98340015-6e3c-4e83-a280-a306263a29fb",
       "name": "Criar",
-      "url": "http://127.0.0.1:5001/api/registros",
+      "url": "{{CLIENTES_URL}}/api/clientes",
       "method": "POST",
       "sortNum": 20000,
-      "created": "2026-11-06T20:00:00.000Z",
-      "modified": "2026-11-06T20:00:00.000Z",
+      "created": "2026-11-23T12:00:00.000Z",
+      "modified": "2026-11-23T12:00:00.000Z",
       "headers": [
         {
           "name": "Content-Type",
@@ -73,117 +80,124 @@
         }
       ],
       "params": [],
-      "tests": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "201"
+        }
+      ],
       "body": {
         "type": "json",
-        "raw": "{\n  \"nome\": \"Exemplo 1\"\n}",
+        "raw": "{\n  \"nome\": \"Maria Souza\",\n  \"telefone\": \"11 99999-0000\",\n  \"endereco\": \"Rua A, 100\"\n}",
         "form": []
       }
     },
     {
-      "_id": "4b142207-2d1d-4e35-8c39-310a6c68d345",
+      "_id": "943ca07d-3542-4f2b-beb5-554f22983bdb",
       "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
-      "containerId": "0883ab58-4f00-4cd7-b9b8-7912b830e9c9",
-      "name": "Listar",
-      "url": "http://127.0.0.1:5001/api/registros",
-      "method": "GET",
+      "containerId": "98340015-6e3c-4e83-a280-a306263a29fb",
+      "name": "Criar inválido (400)",
+      "url": "{{CLIENTES_URL}}/api/clientes",
+      "method": "POST",
       "sortNum": 30000,
-      "created": "2026-11-06T20:00:00.000Z",
-      "modified": "2026-11-06T20:00:00.000Z",
-      "headers": [],
+      "created": "2026-11-23T12:00:00.000Z",
+      "modified": "2026-11-23T12:00:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
       "params": [],
-      "tests": []
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "400"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{}",
+        "form": []
+      }
     },
     {
-      "_id": "e529c0d3-ac25-4632-8a1b-b32fdaf87264",
+      "_id": "d9cd4036-a7c2-410a-973f-d918043584b5",
       "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
-      "containerId": "0883ab58-4f00-4cd7-b9b8-7912b830e9c9",
-      "name": "Buscar 1",
-      "url": "http://127.0.0.1:5001/api/registros/1",
+      "containerId": "98340015-6e3c-4e83-a280-a306263a29fb",
+      "name": "Listar",
+      "url": "{{CLIENTES_URL}}/api/clientes",
       "method": "GET",
       "sortNum": 40000,
-      "created": "2026-11-06T20:00:00.000Z",
-      "modified": "2026-11-06T20:00:00.000Z",
+      "created": "2026-11-23T12:00:00.000Z",
+      "modified": "2026-11-23T12:00:00.000Z",
       "headers": [],
       "params": [],
-      "tests": []
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
     },
     {
-      "_id": "4cc123e1-84f7-4332-a929-263095512451",
+      "_id": "a5946200-e6b7-48d9-a10c-f364723bf1f8",
       "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
-      "containerId": "0883ab58-4f00-4cd7-b9b8-7912b830e9c9",
-      "name": "Atualizar 1",
-      "url": "http://127.0.0.1:5001/api/registros/1",
-      "method": "PUT",
+      "containerId": "98340015-6e3c-4e83-a280-a306263a29fb",
+      "name": "Buscar 1",
+      "url": "{{CLIENTES_URL}}/api/clientes/1",
+      "method": "GET",
       "sortNum": 50000,
-      "created": "2026-11-06T20:00:00.000Z",
-      "modified": "2026-11-06T20:00:00.000Z",
-      "headers": [
-        {
-          "name": "Content-Type",
-          "value": "application/json"
-        }
-      ],
+      "created": "2026-11-23T12:00:00.000Z",
+      "modified": "2026-11-23T12:00:00.000Z",
+      "headers": [],
       "params": [],
-      "tests": [],
-      "body": {
-        "type": "json",
-        "raw": "{\n  \"nome\": \"Exemplo alterado\"\n}",
-        "form": []
-      }
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
     },
     {
-      "_id": "a4a8458e-a437-4700-bd58-6e73fbadf0a6",
+      "_id": "ee9eb8d6-71d0-4d56-8a74-7ba4a8b1f2b9",
       "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
-      "containerId": "0883ab58-4f00-4cd7-b9b8-7912b830e9c9",
-      "name": "Inativar 1",
-      "url": "http://127.0.0.1:5001/api/registros/1/inativar",
-      "method": "PATCH",
+      "containerId": "98340015-6e3c-4e83-a280-a306263a29fb",
+      "name": "Buscar inexistente (404)",
+      "url": "{{CLIENTES_URL}}/api/clientes/9999",
+      "method": "GET",
       "sortNum": 60000,
-      "created": "2026-11-06T20:00:00.000Z",
-      "modified": "2026-11-06T20:00:00.000Z",
+      "created": "2026-11-23T12:00:00.000Z",
+      "modified": "2026-11-23T12:00:00.000Z",
       "headers": [],
       "params": [],
-      "tests": []
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "404"
+        }
+      ]
     },
     {
-      "_id": "4ba8af62-0a5c-44ef-8629-c379ef1ce75e",
+      "_id": "c0e26a4a-7f42-46bb-adc8-a38116e70664",
       "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
-      "containerId": "0883ab58-4f00-4cd7-b9b8-7912b830e9c9",
-      "name": "Está ativo? (1)",
-      "url": "http://127.0.0.1:5001/api/registros/1/ativo",
-      "method": "GET",
+      "containerId": "98340015-6e3c-4e83-a280-a306263a29fb",
+      "name": "Atualizar 1",
+      "url": "{{CLIENTES_URL}}/api/clientes/1",
+      "method": "PUT",
       "sortNum": 70000,
-      "created": "2026-11-06T20:00:00.000Z",
-      "modified": "2026-11-06T20:00:00.000Z",
-      "headers": [],
-      "params": [],
-      "tests": []
-    },
-    {
-      "_id": "17a87e76-5452-4adf-abd3-72e5ef7a6295",
-      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
-      "containerId": "385fafff-3d78-42ad-986e-3190440a6734",
-      "name": "Health",
-      "url": "http://127.0.0.1:5002/api/health",
-      "method": "GET",
-      "sortNum": 80000,
-      "created": "2026-11-06T20:00:00.000Z",
-      "modified": "2026-11-06T20:00:00.000Z",
-      "headers": [],
-      "params": [],
-      "tests": []
-    },
-    {
-      "_id": "bed34992-7d09-48a0-9609-742cef36c621",
-      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
-      "containerId": "385fafff-3d78-42ad-986e-3190440a6734",
-      "name": "Criar",
-      "url": "http://127.0.0.1:5002/api/registros",
-      "method": "POST",
-      "sortNum": 90000,
-      "created": "2026-11-06T20:00:00.000Z",
-      "modified": "2026-11-06T20:00:00.000Z",
+      "created": "2026-11-23T12:00:00.000Z",
+      "modified": "2026-11-23T12:00:00.000Z",
       "headers": [
         {
           "name": "Content-Type",
@@ -191,51 +205,135 @@
         }
       ],
       "params": [],
-      "tests": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ],
       "body": {
         "type": "json",
-        "raw": "{\n  \"nome\": \"Exemplo 1\"\n}",
+        "raw": "{\n  \"nome\": \"Maria S. Lima\",\n  \"telefone\": \"11 98888-0000\",\n  \"endereco\": \"Rua B, 200\"\n}",
         "form": []
       }
     },
     {
-      "_id": "121030d0-d9fa-40df-a2c4-4e14be75c537",
+      "_id": "c05aa570-2375-454f-b699-347ae5f07597",
       "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
-      "containerId": "385fafff-3d78-42ad-986e-3190440a6734",
-      "name": "Listar",
-      "url": "http://127.0.0.1:5002/api/registros",
+      "containerId": "98340015-6e3c-4e83-a280-a306263a29fb",
+      "name": "Inativar 2 (cliente 2 já nasce inativo → 400)",
+      "url": "{{CLIENTES_URL}}/api/clientes/2/inativar",
+      "method": "PATCH",
+      "sortNum": 80000,
+      "created": "2026-11-23T12:00:00.000Z",
+      "modified": "2026-11-23T12:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "400"
+        }
+      ]
+    },
+    {
+      "_id": "78a15f26-5e8b-42f7-9822-1989eca4d77a",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "98340015-6e3c-4e83-a280-a306263a29fb",
+      "name": "Está ativo? (1) → true",
+      "url": "{{CLIENTES_URL}}/api/clientes/1/ativo",
+      "method": "GET",
+      "sortNum": 90000,
+      "created": "2026-11-23T12:00:00.000Z",
+      "modified": "2026-11-23T12:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
+    },
+    {
+      "_id": "ff9978ef-f78f-4530-87b4-6eba5a7b80bc",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "98340015-6e3c-4e83-a280-a306263a29fb",
+      "name": "Está ativo? (2) → false",
+      "url": "{{CLIENTES_URL}}/api/clientes/2/ativo",
       "method": "GET",
       "sortNum": 100000,
-      "created": "2026-11-06T20:00:00.000Z",
-      "modified": "2026-11-06T20:00:00.000Z",
+      "created": "2026-11-23T12:00:00.000Z",
+      "modified": "2026-11-23T12:00:00.000Z",
       "headers": [],
       "params": [],
-      "tests": []
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
     },
     {
-      "_id": "478f4f97-3597-4e2d-a93d-8ee12073d49b",
+      "_id": "999b3ef6-2659-4f49-969a-2b285bbab618",
       "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
-      "containerId": "385fafff-3d78-42ad-986e-3190440a6734",
-      "name": "Buscar 1",
-      "url": "http://127.0.0.1:5002/api/registros/1",
-      "method": "GET",
+      "containerId": "98340015-6e3c-4e83-a280-a306263a29fb",
+      "name": "Inativar 3",
+      "url": "{{CLIENTES_URL}}/api/clientes/3/inativar",
+      "method": "PATCH",
       "sortNum": 110000,
-      "created": "2026-11-06T20:00:00.000Z",
-      "modified": "2026-11-06T20:00:00.000Z",
+      "created": "2026-11-23T12:00:00.000Z",
+      "modified": "2026-11-23T12:00:00.000Z",
       "headers": [],
       "params": [],
-      "tests": []
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
     },
     {
-      "_id": "2e1d57f6-81dc-426b-8aca-4f3947cd7e41",
+      "_id": "ddf4d31e-9cbf-4c1f-9d3e-0e8d89049331",
       "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
-      "containerId": "385fafff-3d78-42ad-986e-3190440a6734",
-      "name": "Atualizar 1",
-      "url": "http://127.0.0.1:5002/api/registros/1",
-      "method": "PUT",
+      "containerId": "9f8257f2-7bcb-4b79-9978-5bcf3c4d21e3",
+      "name": "Health",
+      "url": "{{CARDAPIO_URL}}/api/health",
+      "method": "GET",
       "sortNum": 120000,
-      "created": "2026-11-06T20:00:00.000Z",
-      "modified": "2026-11-06T20:00:00.000Z",
+      "created": "2026-11-23T12:00:00.000Z",
+      "modified": "2026-11-23T12:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
+    },
+    {
+      "_id": "20aa38e9-77de-44f7-8891-e005503e1422",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "9f8257f2-7bcb-4b79-9978-5bcf3c4d21e3",
+      "name": "Criar",
+      "url": "{{CARDAPIO_URL}}/api/pratos",
+      "method": "POST",
+      "sortNum": 130000,
+      "created": "2026-11-23T12:00:00.000Z",
+      "modified": "2026-11-23T12:00:00.000Z",
       "headers": [
         {
           "name": "Content-Type",
@@ -243,117 +341,124 @@
         }
       ],
       "params": [],
-      "tests": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "201"
+        }
+      ],
       "body": {
         "type": "json",
-        "raw": "{\n  \"nome\": \"Exemplo alterado\"\n}",
+        "raw": "{\n  \"nome\": \"Suco de laranja\",\n  \"preco\": 8.5\n}",
         "form": []
       }
     },
     {
-      "_id": "0097d1ba-caf8-4d4e-86e9-b9789d6f1516",
+      "_id": "89adf596-1b35-4c0c-806b-dae73f3e174d",
       "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
-      "containerId": "385fafff-3d78-42ad-986e-3190440a6734",
-      "name": "Inativar 1",
-      "url": "http://127.0.0.1:5002/api/registros/1/inativar",
-      "method": "PATCH",
-      "sortNum": 130000,
-      "created": "2026-11-06T20:00:00.000Z",
-      "modified": "2026-11-06T20:00:00.000Z",
-      "headers": [],
-      "params": [],
-      "tests": []
-    },
-    {
-      "_id": "631354c9-fc9d-457a-8210-8d98550ebf96",
-      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
-      "containerId": "385fafff-3d78-42ad-986e-3190440a6734",
-      "name": "Está ativo? (1)",
-      "url": "http://127.0.0.1:5002/api/registros/1/ativo",
-      "method": "GET",
+      "containerId": "9f8257f2-7bcb-4b79-9978-5bcf3c4d21e3",
+      "name": "Criar inválido (400)",
+      "url": "{{CARDAPIO_URL}}/api/pratos",
+      "method": "POST",
       "sortNum": 140000,
-      "created": "2026-11-06T20:00:00.000Z",
-      "modified": "2026-11-06T20:00:00.000Z",
-      "headers": [],
+      "created": "2026-11-23T12:00:00.000Z",
+      "modified": "2026-11-23T12:00:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
       "params": [],
-      "tests": []
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "400"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{}",
+        "form": []
+      }
     },
     {
-      "_id": "4df0e820-c960-40cc-a719-d8ff9c120c0d",
+      "_id": "6ccde624-608e-4254-b6a3-559ff17a66a8",
       "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
-      "containerId": "b70b23fb-ebf9-40ae-a151-5146d1aeb16d",
-      "name": "Health",
-      "url": "http://127.0.0.1:5003/api/health",
+      "containerId": "9f8257f2-7bcb-4b79-9978-5bcf3c4d21e3",
+      "name": "Listar",
+      "url": "{{CARDAPIO_URL}}/api/pratos",
       "method": "GET",
       "sortNum": 150000,
-      "created": "2026-11-06T20:00:00.000Z",
-      "modified": "2026-11-06T20:00:00.000Z",
+      "created": "2026-11-23T12:00:00.000Z",
+      "modified": "2026-11-23T12:00:00.000Z",
       "headers": [],
       "params": [],
-      "tests": []
-    },
-    {
-      "_id": "c28d4cc6-3f97-4c9e-a4bc-6d2b3d7b0f1b",
-      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
-      "containerId": "b70b23fb-ebf9-40ae-a151-5146d1aeb16d",
-      "name": "Criar",
-      "url": "http://127.0.0.1:5003/api/registros",
-      "method": "POST",
-      "sortNum": 160000,
-      "created": "2026-11-06T20:00:00.000Z",
-      "modified": "2026-11-06T20:00:00.000Z",
-      "headers": [
+      "tests": [
         {
-          "name": "Content-Type",
-          "value": "application/json"
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
         }
-      ],
-      "params": [],
-      "tests": [],
-      "body": {
-        "type": "json",
-        "raw": "{\n  \"nome\": \"Exemplo 1\"\n}",
-        "form": []
-      }
+      ]
     },
     {
-      "_id": "a72eb3d6-c312-401d-b068-9cb3e2c6a47f",
+      "_id": "4f12bd74-8292-4706-adfe-003eb3a27b4e",
       "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
-      "containerId": "b70b23fb-ebf9-40ae-a151-5146d1aeb16d",
-      "name": "Listar",
-      "url": "http://127.0.0.1:5003/api/registros",
+      "containerId": "9f8257f2-7bcb-4b79-9978-5bcf3c4d21e3",
+      "name": "Buscar 1",
+      "url": "{{CARDAPIO_URL}}/api/pratos/1",
+      "method": "GET",
+      "sortNum": 160000,
+      "created": "2026-11-23T12:00:00.000Z",
+      "modified": "2026-11-23T12:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
+    },
+    {
+      "_id": "afafe6e8-0122-49f8-84d7-9ed0bd2207dc",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "9f8257f2-7bcb-4b79-9978-5bcf3c4d21e3",
+      "name": "Buscar inexistente (404)",
+      "url": "{{CARDAPIO_URL}}/api/pratos/9999",
       "method": "GET",
       "sortNum": 170000,
-      "created": "2026-11-06T20:00:00.000Z",
-      "modified": "2026-11-06T20:00:00.000Z",
+      "created": "2026-11-23T12:00:00.000Z",
+      "modified": "2026-11-23T12:00:00.000Z",
       "headers": [],
       "params": [],
-      "tests": []
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "404"
+        }
+      ]
     },
     {
-      "_id": "967e4de3-01e2-4699-aab8-f6aca4d7116a",
+      "_id": "823d4005-51bf-4993-bbd2-f7ad89cadd09",
       "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
-      "containerId": "b70b23fb-ebf9-40ae-a151-5146d1aeb16d",
-      "name": "Buscar 1",
-      "url": "http://127.0.0.1:5003/api/registros/1",
-      "method": "GET",
-      "sortNum": 180000,
-      "created": "2026-11-06T20:00:00.000Z",
-      "modified": "2026-11-06T20:00:00.000Z",
-      "headers": [],
-      "params": [],
-      "tests": []
-    },
-    {
-      "_id": "246fb5a9-2099-4afc-b15e-e834a2c1ca4a",
-      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
-      "containerId": "b70b23fb-ebf9-40ae-a151-5146d1aeb16d",
+      "containerId": "9f8257f2-7bcb-4b79-9978-5bcf3c4d21e3",
       "name": "Atualizar 1",
-      "url": "http://127.0.0.1:5003/api/registros/1",
+      "url": "{{CARDAPIO_URL}}/api/pratos/1",
       "method": "PUT",
-      "sortNum": 190000,
-      "created": "2026-11-06T20:00:00.000Z",
-      "modified": "2026-11-06T20:00:00.000Z",
+      "sortNum": 180000,
+      "created": "2026-11-23T12:00:00.000Z",
+      "modified": "2026-11-23T12:00:00.000Z",
       "headers": [
         {
           "name": "Content-Type",
@@ -361,65 +466,124 @@
         }
       ],
       "params": [],
-      "tests": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ],
       "body": {
         "type": "json",
-        "raw": "{\n  \"nome\": \"Exemplo alterado\"\n}",
+        "raw": "{\n  \"nome\": \"X-Bacon\",\n  \"preco\": 29.0\n}",
         "form": []
       }
     },
     {
-      "_id": "01f8b41c-820b-4fb1-b841-51efc96f0312",
+      "_id": "92eb248d-dfa6-423e-90c1-f5f26906112d",
       "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
-      "containerId": "b70b23fb-ebf9-40ae-a151-5146d1aeb16d",
-      "name": "Inativar 1",
-      "url": "http://127.0.0.1:5003/api/registros/1/inativar",
+      "containerId": "9f8257f2-7bcb-4b79-9978-5bcf3c4d21e3",
+      "name": "Inativar 3",
+      "url": "{{CARDAPIO_URL}}/api/pratos/3/inativar",
+      "method": "PATCH",
+      "sortNum": 190000,
+      "created": "2026-11-23T12:00:00.000Z",
+      "modified": "2026-11-23T12:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
+    },
+    {
+      "_id": "a4b67756-4ff1-4255-b90d-cb0e20fc1a98",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "9f8257f2-7bcb-4b79-9978-5bcf3c4d21e3",
+      "name": "Inativar 2 (prato 2 já nasce inativo → 400)",
+      "url": "{{CARDAPIO_URL}}/api/pratos/2/inativar",
       "method": "PATCH",
       "sortNum": 200000,
-      "created": "2026-11-06T20:00:00.000Z",
-      "modified": "2026-11-06T20:00:00.000Z",
+      "created": "2026-11-23T12:00:00.000Z",
+      "modified": "2026-11-23T12:00:00.000Z",
       "headers": [],
       "params": [],
-      "tests": []
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "400"
+        }
+      ]
     },
     {
-      "_id": "f552d3f2-d649-418d-84a6-b756a4bcb559",
+      "_id": "f480cd37-e35c-4089-82cf-661d01f33514",
       "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
-      "containerId": "b70b23fb-ebf9-40ae-a151-5146d1aeb16d",
-      "name": "Está ativo? (1)",
-      "url": "http://127.0.0.1:5003/api/registros/1/ativo",
-      "method": "GET",
+      "containerId": "9f8257f2-7bcb-4b79-9978-5bcf3c4d21e3",
+      "name": "Criar com preço 0 (400)",
+      "url": "{{CARDAPIO_URL}}/api/pratos",
+      "method": "POST",
       "sortNum": 210000,
-      "created": "2026-11-06T20:00:00.000Z",
-      "modified": "2026-11-06T20:00:00.000Z",
-      "headers": [],
+      "created": "2026-11-23T12:00:00.000Z",
+      "modified": "2026-11-23T12:00:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
       "params": [],
-      "tests": []
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "400"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"nome\": \"Grátis\",\n  \"preco\": 0\n}",
+        "form": []
+      }
     },
     {
-      "_id": "6fd7f9a4-fb36-4b9f-b767-9038a3f636cd",
+      "_id": "2555968c-9de0-4e82-9ed7-410e75665809",
       "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
-      "containerId": "ff5a760b-78e5-4f71-945f-af91a1fe110c",
+      "containerId": "b4bd9c71-767c-45ae-8ced-74168f4eaf15",
       "name": "Health",
-      "url": "http://127.0.0.1:5004/api/health",
+      "url": "{{ENTREGADORES_URL}}/api/health",
       "method": "GET",
       "sortNum": 220000,
-      "created": "2026-11-06T20:00:00.000Z",
-      "modified": "2026-11-06T20:00:00.000Z",
+      "created": "2026-11-23T12:00:00.000Z",
+      "modified": "2026-11-23T12:00:00.000Z",
       "headers": [],
       "params": [],
-      "tests": []
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
     },
     {
-      "_id": "b680bd9e-f804-4e63-adc0-eee00abb2be9",
+      "_id": "d4759087-9296-4217-a1ab-0e91ef2b87c4",
       "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
-      "containerId": "ff5a760b-78e5-4f71-945f-af91a1fe110c",
+      "containerId": "b4bd9c71-767c-45ae-8ced-74168f4eaf15",
       "name": "Criar",
-      "url": "http://127.0.0.1:5004/api/registros",
+      "url": "{{ENTREGADORES_URL}}/api/entregadores",
       "method": "POST",
       "sortNum": 230000,
-      "created": "2026-11-06T20:00:00.000Z",
-      "modified": "2026-11-06T20:00:00.000Z",
+      "created": "2026-11-23T12:00:00.000Z",
+      "modified": "2026-11-23T12:00:00.000Z",
       "headers": [
         {
           "name": "Content-Type",
@@ -427,51 +591,124 @@
         }
       ],
       "params": [],
-      "tests": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "201"
+        }
+      ],
       "body": {
         "type": "json",
-        "raw": "{\n  \"nome\": \"Exemplo 1\"\n}",
+        "raw": "{\n  \"nome\": \"Carlos\",\n  \"veiculo\": \"Moto\"\n}",
         "form": []
       }
     },
     {
-      "_id": "4766c0af-779c-4fd5-abc3-714e396df22b",
+      "_id": "f1ea06b7-16b1-4bf4-abf7-811a713e724f",
       "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
-      "containerId": "ff5a760b-78e5-4f71-945f-af91a1fe110c",
-      "name": "Listar",
-      "url": "http://127.0.0.1:5004/api/registros",
-      "method": "GET",
+      "containerId": "b4bd9c71-767c-45ae-8ced-74168f4eaf15",
+      "name": "Criar inválido (400)",
+      "url": "{{ENTREGADORES_URL}}/api/entregadores",
+      "method": "POST",
       "sortNum": 240000,
-      "created": "2026-11-06T20:00:00.000Z",
-      "modified": "2026-11-06T20:00:00.000Z",
-      "headers": [],
+      "created": "2026-11-23T12:00:00.000Z",
+      "modified": "2026-11-23T12:00:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
       "params": [],
-      "tests": []
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "400"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{}",
+        "form": []
+      }
     },
     {
-      "_id": "ede25abb-2d4c-4a8e-86bc-49f6631aeab4",
+      "_id": "5ef4cc26-55cc-43b3-86ea-ba12a277dc54",
       "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
-      "containerId": "ff5a760b-78e5-4f71-945f-af91a1fe110c",
-      "name": "Buscar 1",
-      "url": "http://127.0.0.1:5004/api/registros/1",
+      "containerId": "b4bd9c71-767c-45ae-8ced-74168f4eaf15",
+      "name": "Listar",
+      "url": "{{ENTREGADORES_URL}}/api/entregadores",
       "method": "GET",
       "sortNum": 250000,
-      "created": "2026-11-06T20:00:00.000Z",
-      "modified": "2026-11-06T20:00:00.000Z",
+      "created": "2026-11-23T12:00:00.000Z",
+      "modified": "2026-11-23T12:00:00.000Z",
       "headers": [],
       "params": [],
-      "tests": []
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
     },
     {
-      "_id": "fe19f9cb-e5fe-4cf0-b3d3-eba6779f4629",
+      "_id": "28577707-bb30-4802-ab2a-2fd924f43bf6",
       "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
-      "containerId": "ff5a760b-78e5-4f71-945f-af91a1fe110c",
-      "name": "Atualizar 1",
-      "url": "http://127.0.0.1:5004/api/registros/1",
-      "method": "PUT",
+      "containerId": "b4bd9c71-767c-45ae-8ced-74168f4eaf15",
+      "name": "Buscar 1",
+      "url": "{{ENTREGADORES_URL}}/api/entregadores/1",
+      "method": "GET",
       "sortNum": 260000,
-      "created": "2026-11-06T20:00:00.000Z",
-      "modified": "2026-11-06T20:00:00.000Z",
+      "created": "2026-11-23T12:00:00.000Z",
+      "modified": "2026-11-23T12:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
+    },
+    {
+      "_id": "94ead09a-1406-4899-98ec-a521bc736884",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "b4bd9c71-767c-45ae-8ced-74168f4eaf15",
+      "name": "Buscar inexistente (404)",
+      "url": "{{ENTREGADORES_URL}}/api/entregadores/9999",
+      "method": "GET",
+      "sortNum": 270000,
+      "created": "2026-11-23T12:00:00.000Z",
+      "modified": "2026-11-23T12:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "404"
+        }
+      ]
+    },
+    {
+      "_id": "b7b23ba0-1f1e-4663-871f-7308eeadabeb",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "b4bd9c71-767c-45ae-8ced-74168f4eaf15",
+      "name": "Atualizar 1",
+      "url": "{{ENTREGADORES_URL}}/api/entregadores/1",
+      "method": "PUT",
+      "sortNum": 280000,
+      "created": "2026-11-23T12:00:00.000Z",
+      "modified": "2026-11-23T12:00:00.000Z",
       "headers": [
         {
           "name": "Content-Type",
@@ -479,40 +716,321 @@
         }
       ],
       "params": [],
-      "tests": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ],
       "body": {
         "type": "json",
-        "raw": "{\n  \"nome\": \"Exemplo alterado\"\n}",
+        "raw": "{\n  \"nome\": \"Carlos Silva\",\n  \"veiculo\": \"Bicicleta\"\n}",
         "form": []
       }
     },
     {
-      "_id": "6dd6a6c4-3558-41e0-8b0a-ed0968d3ff9b",
+      "_id": "e4477e8e-e37c-4615-afca-5ece14fcd5cf",
       "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
-      "containerId": "ff5a760b-78e5-4f71-945f-af91a1fe110c",
-      "name": "Inativar 1",
-      "url": "http://127.0.0.1:5004/api/registros/1/inativar",
+      "containerId": "b4bd9c71-767c-45ae-8ced-74168f4eaf15",
+      "name": "Ocupar 1 (1ª vez → 200)",
+      "url": "{{ENTREGADORES_URL}}/api/entregadores/1/ocupar",
       "method": "PATCH",
-      "sortNum": 270000,
-      "created": "2026-11-06T20:00:00.000Z",
-      "modified": "2026-11-06T20:00:00.000Z",
+      "sortNum": 290000,
+      "created": "2026-11-23T12:00:00.000Z",
+      "modified": "2026-11-23T12:00:00.000Z",
       "headers": [],
       "params": [],
-      "tests": []
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
     },
     {
-      "_id": "fa24dcb5-9564-4d99-918c-6f6f631caae6",
+      "_id": "e8161b97-01cc-4f9c-940c-69ad10ee565e",
       "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
-      "containerId": "ff5a760b-78e5-4f71-945f-af91a1fe110c",
-      "name": "Está ativo? (1)",
-      "url": "http://127.0.0.1:5004/api/registros/1/ativo",
-      "method": "GET",
-      "sortNum": 280000,
-      "created": "2026-11-06T20:00:00.000Z",
-      "modified": "2026-11-06T20:00:00.000Z",
+      "containerId": "b4bd9c71-767c-45ae-8ced-74168f4eaf15",
+      "name": "Ocupar 1 (2ª vez → 400)",
+      "url": "{{ENTREGADORES_URL}}/api/entregadores/1/ocupar",
+      "method": "PATCH",
+      "sortNum": 300000,
+      "created": "2026-11-23T12:00:00.000Z",
+      "modified": "2026-11-23T12:00:00.000Z",
       "headers": [],
       "params": [],
-      "tests": []
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "400"
+        }
+      ]
+    },
+    {
+      "_id": "fc98196a-8a25-44d0-a87d-177ad94ed764",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "b4bd9c71-767c-45ae-8ced-74168f4eaf15",
+      "name": "Liberar 1",
+      "url": "{{ENTREGADORES_URL}}/api/entregadores/1/liberar",
+      "method": "PATCH",
+      "sortNum": 310000,
+      "created": "2026-11-23T12:00:00.000Z",
+      "modified": "2026-11-23T12:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
+    },
+    {
+      "_id": "8c187d8c-a150-4815-871b-7fe69ef10d53",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "b4bd9c71-767c-45ae-8ced-74168f4eaf15",
+      "name": "Inativar 3",
+      "url": "{{ENTREGADORES_URL}}/api/entregadores/3/inativar",
+      "method": "PATCH",
+      "sortNum": 320000,
+      "created": "2026-11-23T12:00:00.000Z",
+      "modified": "2026-11-23T12:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
+    },
+    {
+      "_id": "e66e4f5a-78fc-4acc-a583-ec6f7c1efdf2",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "ab54800b-371b-4575-a829-8dcca76cad2c",
+      "name": "Health",
+      "url": "{{PEDIDOS_URL}}/api/health",
+      "method": "GET",
+      "sortNum": 330000,
+      "created": "2026-11-23T12:00:00.000Z",
+      "modified": "2026-11-23T12:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
+    },
+    {
+      "_id": "3a0f3cb3-3437-43d3-a5f6-084ada2f966f",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "ab54800b-371b-4575-a829-8dcca76cad2c",
+      "name": "Listar",
+      "url": "{{PEDIDOS_URL}}/api/pedidos",
+      "method": "GET",
+      "sortNum": 340000,
+      "created": "2026-11-23T12:00:00.000Z",
+      "modified": "2026-11-23T12:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
+    },
+    {
+      "_id": "27db8a22-cb12-4aa2-86e2-d23952f0acac",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "ab54800b-371b-4575-a829-8dcca76cad2c",
+      "name": "Buscar 1",
+      "url": "{{PEDIDOS_URL}}/api/pedidos/1",
+      "method": "GET",
+      "sortNum": 350000,
+      "created": "2026-11-23T12:00:00.000Z",
+      "modified": "2026-11-23T12:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
+    },
+    {
+      "_id": "84cd557f-b653-4c67-aea9-626b7b048ac9",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "4b6d6ae0-b13a-4899-be82-57f8e7bc6139",
+      "name": "1. Pedido válido → 201",
+      "url": "{{PEDIDOS_URL}}/api/pedidos",
+      "method": "POST",
+      "sortNum": 360000,
+      "created": "2026-11-23T12:00:00.000Z",
+      "modified": "2026-11-23T12:00:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "201"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"cliente_id\": 1,\n  \"prato_id\": 1,\n  \"entregador_id\": 2\n}",
+        "form": []
+      }
+    },
+    {
+      "_id": "1faca414-1ade-42b0-a7a9-5a2c402323a2",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "4b6d6ae0-b13a-4899-be82-57f8e7bc6139",
+      "name": "2. Cliente inativo (cliente 2) → 400",
+      "url": "{{PEDIDOS_URL}}/api/pedidos",
+      "method": "POST",
+      "sortNum": 370000,
+      "created": "2026-11-23T12:00:00.000Z",
+      "modified": "2026-11-23T12:00:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "400"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"cliente_id\": 2,\n  \"prato_id\": 1,\n  \"entregador_id\": 2\n}",
+        "form": []
+      }
+    },
+    {
+      "_id": "0529d126-96c7-450d-9ea2-6a50e098cf1f",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "4b6d6ae0-b13a-4899-be82-57f8e7bc6139",
+      "name": "3. Prato inativo (prato 2) → 400",
+      "url": "{{PEDIDOS_URL}}/api/pedidos",
+      "method": "POST",
+      "sortNum": 380000,
+      "created": "2026-11-23T12:00:00.000Z",
+      "modified": "2026-11-23T12:00:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "400"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"cliente_id\": 1,\n  \"prato_id\": 2,\n  \"entregador_id\": 2\n}",
+        "form": []
+      }
+    },
+    {
+      "_id": "65f0c615-1252-4f5b-a0f6-ec7e111d5e18",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "4b6d6ae0-b13a-4899-be82-57f8e7bc6139",
+      "name": "4. Entregador ocupado → 400 e pedido desfeito",
+      "url": "{{PEDIDOS_URL}}/api/pedidos",
+      "method": "POST",
+      "sortNum": 390000,
+      "created": "2026-11-23T12:00:00.000Z",
+      "modified": "2026-11-23T12:00:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "400"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"cliente_id\": 1,\n  \"prato_id\": 1,\n  \"entregador_id\": 2\n}",
+        "form": []
+      }
+    },
+    {
+      "_id": "38401b56-c54a-4c15-8e50-7886b16930c5",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "4b6d6ae0-b13a-4899-be82-57f8e7bc6139",
+      "name": "5. Serviço fora do ar (pare o cardápio e rode) → 400",
+      "url": "{{PEDIDOS_URL}}/api/pedidos",
+      "method": "POST",
+      "sortNum": 400000,
+      "created": "2026-11-23T12:00:00.000Z",
+      "modified": "2026-11-23T12:00:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "400"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"cliente_id\": 1,\n  \"prato_id\": 1,\n  \"entregador_id\": 2\n}",
+        "form": []
+      }
     }
   ]
 }

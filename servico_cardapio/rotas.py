@@ -2,46 +2,38 @@ from flask import Blueprint, jsonify, request
 
 import regras
 
-rotas = Blueprint("registros", __name__, url_prefix="/api")
+rotas = Blueprint("pratos", __name__, url_prefix="/api")
 
 
 def _nao_encontrado():
-    return jsonify(erro="Registro não encontrado."), 404
+    return jsonify(erro="Prato não encontrado."), 404
 
 
-@rotas.post("/registros")
+@rotas.post("/pratos")
 def criar():
-    registro = regras.criar(request.get_json(silent=True) or {})
-    return jsonify(registro.para_dict()), 201
+    prato = regras.criar(request.get_json(silent=True) or {})
+    return jsonify(prato.para_dict()), 201
 
 
-@rotas.get("/registros")
+@rotas.get("/pratos")
 def listar():
-    return jsonify([r.para_dict() for r in regras.listar()])
+    return jsonify([p.para_dict() for p in regras.listar()])
 
 
-@rotas.get("/registros/<int:registro_id>")
-def buscar(registro_id):
-    registro = regras.buscar(registro_id)
-    return jsonify(registro.para_dict()) if registro else _nao_encontrado()
+# Devolve o prato inteiro (com preco e ativo): é a rota que o pedidos consulta.
+@rotas.get("/pratos/<int:prato_id>")
+def buscar(prato_id):
+    prato = regras.buscar(prato_id)
+    return jsonify(prato.para_dict()) if prato else _nao_encontrado()
 
 
-@rotas.put("/registros/<int:registro_id>")
-def atualizar(registro_id):
-    registro = regras.atualizar(registro_id, request.get_json(silent=True) or {})
-    return jsonify(registro.para_dict()) if registro else _nao_encontrado()
+@rotas.put("/pratos/<int:prato_id>")
+def atualizar(prato_id):
+    prato = regras.atualizar(prato_id, request.get_json(silent=True) or {})
+    return jsonify(prato.para_dict()) if prato else _nao_encontrado()
 
 
-@rotas.patch("/registros/<int:registro_id>/inativar")
-def inativar(registro_id):
-    registro = regras.inativar(registro_id)
-    return jsonify(registro.para_dict()) if registro else _nao_encontrado()
-
-
-# Rota pensada para OUTROS serviços perguntarem "está ativo?" (uma busca simples).
-@rotas.get("/registros/<int:registro_id>/ativo")
-def esta_ativo(registro_id):
-    registro = regras.buscar(registro_id)
-    if registro is None:
-        return _nao_encontrado()
-    return jsonify(id=registro.id, ativo=registro.ativo)
+@rotas.patch("/pratos/<int:prato_id>/inativar")
+def inativar(prato_id):
+    prato = regras.inativar(prato_id)
+    return jsonify(prato.para_dict()) if prato else _nao_encontrado()
