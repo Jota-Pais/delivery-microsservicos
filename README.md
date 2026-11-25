@@ -47,7 +47,9 @@ Cada serviço tem seu banco SQLite, seu `requirements.txt` e uma rota `/api/heal
 ## Publicação (Render)
 | Serviço | Link |
 |---|---|
-| servico_clientes | (a preencher) |
-| servico_cardapio | (a preencher) |
-| servico_entregadores | (a preencher) |
-| servico_pedidos | (a preencher) |
+| servico_clientes | https://delivery-clientes.onrender.com/api/clientes |
+| servico_cardapio | https://delivery-cardapio.onrender.com/api/pratos |
+| servico_entregadores | https://delivery-entregadores.onrender.com/api/entregadores |
+| servico_pedidos | https://delivery-pedidos.onrender.com/api/pedidos |
+
+> Plano gratuito: os serviços hibernam após 15 minutos sem uso e a primeira chamada pode levar cerca de 50 segundos. Antes de testar, abra o `/api/health` de cada serviço.

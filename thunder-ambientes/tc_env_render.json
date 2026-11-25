@@ -9,19 +9,19 @@
   "variables": [
     {
       "name": "CLIENTES_URL",
-      "value": "https://COLE-O-LINK-DO-RENDER.onrender.com"
+      "value": "https://delivery-clientes.onrender.com"
     },
     {
       "name": "CARDAPIO_URL",
-      "value": "https://COLE-O-LINK-DO-RENDER.onrender.com"
+      "value": "https://delivery-cardapio.onrender.com"
     },
     {
       "name": "ENTREGADORES_URL",
-      "value": "https://COLE-O-LINK-DO-RENDER.onrender.com"
+      "value": "https://delivery-entregadores.onrender.com"
     },
     {
       "name": "PEDIDOS_URL",
-      "value": "https://COLE-O-LINK-DO-RENDER.onrender.com"
+      "value": "https://delivery-pedidos.onrender.com"
     }
   ]
 }
