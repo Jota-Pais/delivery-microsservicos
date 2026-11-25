@@ -2,46 +2,33 @@ from flask import Blueprint, jsonify, request
 
 import regras
 
-rotas = Blueprint("registros", __name__, url_prefix="/api")
+rotas = Blueprint("pedidos", __name__, url_prefix="/api")
 
 
 def _nao_encontrado():
-    return jsonify(erro="Registro não encontrado."), 404
+    return jsonify(erro="Pedido não encontrado."), 404
 
 
-@rotas.post("/registros")
+# Cria o pedido: aqui acontecem as 3 integrações (ver regras.py).
+@rotas.post("/pedidos")
 def criar():
-    registro = regras.criar(request.get_json(silent=True) or {})
-    return jsonify(registro.para_dict()), 201
+    pedido = regras.criar(request.get_json(silent=True) or {})
+    return jsonify(pedido.para_dict()), 201
 
 
-@rotas.get("/registros")
+@rotas.get("/pedidos")
 def listar():
-    return jsonify([r.para_dict() for r in regras.listar()])
+    return jsonify([p.para_dict() for p in regras.listar()])
 
 
-@rotas.get("/registros/<int:registro_id>")
-def buscar(registro_id):
-    registro = regras.buscar(registro_id)
-    return jsonify(registro.para_dict()) if registro else _nao_encontrado()
+@rotas.get("/pedidos/<int:pedido_id>")
+def buscar(pedido_id):
+    pedido = regras.buscar(pedido_id)
+    return jsonify(pedido.para_dict()) if pedido else _nao_encontrado()
 
 
-@rotas.put("/registros/<int:registro_id>")
-def atualizar(registro_id):
-    registro = regras.atualizar(registro_id, request.get_json(silent=True) or {})
-    return jsonify(registro.para_dict()) if registro else _nao_encontrado()
-
-
-@rotas.patch("/registros/<int:registro_id>/inativar")
-def inativar(registro_id):
-    registro = regras.inativar(registro_id)
-    return jsonify(registro.para_dict()) if registro else _nao_encontrado()
-
-
-# Rota pensada para OUTROS serviços perguntarem "está ativo?" (uma busca simples).
-@rotas.get("/registros/<int:registro_id>/ativo")
-def esta_ativo(registro_id):
-    registro = regras.buscar(registro_id)
-    if registro is None:
-        return _nao_encontrado()
-    return jsonify(id=registro.id, ativo=registro.ativo)
+# Cancela o pedido e libera o entregador.
+@rotas.patch("/pedidos/<int:pedido_id>/cancelar")
+def cancelar(pedido_id):
+    pedido = regras.cancelar(pedido_id)
+    return jsonify(pedido.para_dict()) if pedido else _nao_encontrado()

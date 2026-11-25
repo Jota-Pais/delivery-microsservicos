@@ -1,0 +1,64 @@
+### TESTES DAS INTEGRACOES (servico_pedidos, porta 5004)
+### Ligue os 4 servicos antes (iniciar_servicos.bat ou o botao do VS Code).
+### Rode na ordem, clicando em "Send Request" acima de cada bloco.
+
+@pedidos = http://127.0.0.1:5004
+
+### 1. Pedido valido - deve dar 201 (ocupa o entregador 2)
+POST {{pedidos}}/api/pedidos
+Content-Type: application/json
+
+{
+  "cliente_id": 1,
+  "prato_id": 1,
+  "entregador_id": 2
+}
+
+### 1b. Buscar o pedido 1 - deve dar 200 (o valor veio do cardapio)
+GET {{pedidos}}/api/pedidos/1
+
+### 2. Cliente inativo (cliente 2) - deve dar 400 "Cliente inativo."
+POST {{pedidos}}/api/pedidos
+Content-Type: application/json
+
+{
+  "cliente_id": 2,
+  "prato_id": 1,
+  "entregador_id": 1
+}
+
+### 3. Prato inativo (prato 2) - deve dar 400 "Prato indisponivel."
+POST {{pedidos}}/api/pedidos
+Content-Type: application/json
+
+{
+  "cliente_id": 1,
+  "prato_id": 2,
+  "entregador_id": 1
+}
+
+### 4. Entregador ocupado (2, ocupado no teste 1) - deve dar 400 e o pedido e desfeito
+POST {{pedidos}}/api/pedidos
+Content-Type: application/json
+
+{
+  "cliente_id": 1,
+  "prato_id": 1,
+  "entregador_id": 2
+}
+
+### 4b. Listar pedidos - so deve aparecer o pedido 1 (o do teste 4 foi apagado)
+GET {{pedidos}}/api/pedidos
+
+### 5. Servico fora do ar - ANTES, pare o cardapio (Ctrl+C no terminal dele). Deve dar 400 "O servico CARDAPIO esta indisponivel"
+POST {{pedidos}}/api/pedidos
+Content-Type: application/json
+
+{
+  "cliente_id": 1,
+  "prato_id": 1,
+  "entregador_id": 1
+}
+
+### 6. Cancelar o pedido 1 - deve dar 200 e liberar o entregador 2
+PATCH {{pedidos}}/api/pedidos/1/cancelar

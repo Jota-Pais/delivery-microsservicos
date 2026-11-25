@@ -1,7 +1,5 @@
 # Delivery em Microsserviços
 
-> RASCUNHO para revisão do grupo. Pontos marcados com (confirmar) dependem do documento do grupo.
-
 ## Propósito do sistema
 Sistema de delivery de comida dividido em quatro microsserviços independentes (clientes, cardápio, entregadores e pedidos). Ele permite registrar pedidos garantindo que o cliente e o prato estejam ativos e que haja um entregador livre, cada serviço com o seu próprio banco e se comunicando só por HTTP.
 
@@ -20,6 +18,7 @@ Sistema de delivery de comida dividido em quatro microsserviços independentes (
 7. O sistema deve permitir registrar um pedido (confirmar), somente para cliente ativo, prato ativo e entregador livre.
 8. O sistema deve desfazer o pedido caso não seja possível ocupar o entregador.
 9. O sistema deve informar uma mensagem clara quando outro serviço estiver indisponível.
+10. O sistema deve permitir listar e consultar pedidos e cancelar um pedido, liberando o entregador.
 
 ## Descritivo técnico
 
@@ -28,7 +27,7 @@ Sistema de delivery de comida dividido em quatro microsserviços independentes (
 | servico_clientes | 5001 | clientes.db | Cadastro de clientes e consulta "está ativo?" |
 | servico_cardapio | 5002 | cardapio.db | Cadastro de pratos e fornecimento de nome, preço e disponibilidade |
 | servico_entregadores | 5003 | entregadores.db | Cadastro de entregadores e controle ocupado/livre |
-| servico_pedidos | 5004 | pedidos.db | Registro dos pedidos, orquestrando os outros três serviços |
+| servico_pedidos | 5004 | pedidos.db | Registro dos pedidos (cliente, prato, entregador, valor e status), orquestrando os outros três serviços |
 
 Cada serviço tem seu banco SQLite, seu `requirements.txt` e uma rota `/api/health`. Ao iniciar, cria dados iniciais se o banco estiver vazio.
 
